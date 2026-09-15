@@ -1,0 +1,61 @@
+# Day-1 draft configuration schema.
+# experiments/experiment_config.py (Member 2) loads and validates this file.
+# Nothing here is hard-coded into the runner or the networking code --
+# this file is the single source of truth for what gets tested.
+
+server:
+  address: "127.0.0.1"
+  tcp_port: 5001
+  udp_port: 5002
+
+experiments:
+  protocols:
+    - TCP
+    - UDP
+
+  packet_sizes:      # bytes
+    - 64
+    - 128
+    - 256
+    - 512
+    - 1024
+    - 4096
+
+  packet_counts:
+    - 1000
+    - 5000
+    - 10000
+
+  duration_seconds:
+    - 10
+
+  repetitions: 5      # per condition, for mean/median/std
+
+# Experiment Sets B/C/D (see docs/experiments.md once written).
+# Left empty for Week 1 -- Week 1 only runs Set A (normal LAN,
+# no artificial impairment).
+network_conditions:
+  delay_ms: []
+  loss_percent: []
+  bandwidth_mbps: []
+
+output:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  # Canonical column order -- must match common/metrics.h
+  csv_schema:
+    - experiment_id
+    - protocol
+    - packet_size
+    - packet_count
+    - duration
+    - bytes_sent
+    - bytes_received
+    - throughput_mbps
+    - avg_latency_ms
+    - min_latency_ms
+    - max_latency_ms
+    - jitter_ms
+    - packet_loss_percent
+    - retransmissions
+    - timestamp
