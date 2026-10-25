@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NS-3 packet playback</title>
+<style>
+:root{font:13px system-ui,sans-serif;color:#f4f6ff;background:#05060a;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;padding:12px}button,select,input{font:inherit;accent-color:#a78bfa}
+button,select{padding:8px 12px;min-height:40px;border:1px solid #353d55;border-radius:8px;background:#131827;color:#f4f6ff}
+button{cursor:pointer;transition:background .2s}button:hover{background:#29203e}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #5ee7f7;outline-offset:3px}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+canvas{width:100%;height:300px;background:radial-gradient(ellipse at 50% 30%,#19192c,#0d101a 75%);border:1px solid #2a3044;border-radius:12px}
+input[type=range]{width:100%;margin:12px 0}.muted{color:#b5bed0;font-size:11px;line-height:1.6}
+#clock{font:14px ui-monospace,monospace;font-variant-numeric:tabular-nums}.legend{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+#details{min-height:28px;font:12px ui-monospace,monospace;margin:10px 0;overflow-wrap:anywhere}
+#links{display:none;max-height:100px;overflow:auto;margin:8px 0;border:1px solid #2a3044;border-radius:8px;padding:8px 10px;font:11px ui-monospace,monospace;line-height:1.8;color:#b5bed0}
+@media(max-width:480px){#links{display:block}}
+.preview .controls,.preview #time,.preview .legend,.preview #details{display:none}.preview canvas{height:260px}.preview #note{margin-top:10px}
+::selection{background:#6140a5;color:white}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div class="controls"><button id="play" aria-label="Play packet recording">Play</button><button id="restart">Restart</button>
+<label>Speed <select id="speed"><option value="0.05">0.05×</option><option value="0.1" selected>0.1×</option><option value="0.25">0.25×</option><option value="1">1×</option><option value="5">5×</option></select></label>
+<label>Show <select id="filter"><option value="all">All packets</option><option value="DATA">Data</option><option value="ACK">ACK</option><option value="SYN">Handshake</option><option value="drop">Drops</option></select></label><output id="clock" aria-live="off"></output></div>
+<canvas id="network" role="img" aria-label="Network topology and packet movement; the event table in the dashboard provides a text alternative"></canvas>
+<div id="links" role="list" aria-label="Link bandwidth and delay"></div>
+<input id="time" type="range" step="0.0001" aria-label="Simulation time">
+<div class="legend"><span><i class="dot" style="background:#5ee7f7"></i>Data</span><span><i class="dot" style="background:#a78bfa"></i>ACK / control</span><span><i class="dot" style="background:#fb8fb8"></i>Drop ×</span><span>Dashed ring: outcome unobserved</span></div>
+<div id="details" aria-live="off"></div><div class="muted" id="note"></div>
+<script>
+"use strict";
+const recording=/*PAYLOAD*/;
+const canvas=document.getElementById('network'),ctx=canvas.getContext('2d');
+const packets=recording.packets,topology=recording.topology;
+for(const edge of topology.links){const item=document.createElement('div');item.setAttribute('role','listitem');item.textContent=`${edge.source} ↔ ${edge.target} · ${edge.bandwidth_mbps??'default'} Mbps · ${edge.delay_ms??'default'} ms`;document.getElementById('links').appendChild(item);}
+const scrub=document.getElementById('time'),play=document.getElementById('play');
+let playing=Boolean(packets.length&&recording.autoplay&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches),now=packets.length?Math.min(...packets.map(p=>p.start)):0,last=0;
+const begin=now,finish=packets.length?Math.max(...packets.map(p=>p.end??p.start))+.1:1;
+scrub.min=begin;scrub.max=finish;scrub.value=now;
+document.getElementById('note').textContent=packets.length?
+  `Recorded NS-3 device events. Showing ${packets.length} transmissions/drop markers (capture contains ${recording.total} transmissions). Times are simulation seconds; packet dots and drop flashes are visually enlarged. Capture ${recording.truncated?'hit its configured limit: later events may be missing.':'did not hit its configured limit.'} No path or delivery is invented.`:
+  'Topology preview. Run an experiment to record real packet movement. Intermediate nodes forward IPv4 traffic; each link is full duplex.';
+function position(node,w,h){
+  const xs=topology.nodes.map(n=>n.x),ys=topology.nodes.map(n=>n.y);
+  const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+  return [maxX===minX?w/2:65+(node.x-minX)/(maxX-minX)*(w-130),maxY===minY?h/2:70+(node.y-minY)/(maxY-minY)*(h-140)];
+}
+function matches(p){const f=document.getElementById('filter').value;return f==='all'||(f==='drop'?p.status.includes('drop'):f==='SYN'?p.detail.includes('SYN'):p.detail===f);}
+function draw(){
+  const ratio=window.devicePixelRatio||1,w=canvas.clientWidth,h=canvas.clientHeight;
+  if(canvas.width!==Math.round(w*ratio)||canvas.height!==Math.round(h*ratio)){canvas.width=w*ratio;canvas.height=h*ratio;}
+  ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,w,h);
+  const positions=new Map(topology.nodes.map(n=>[n.id,position(n,w,h)]));
+  ctx.font='11px system-ui';ctx.textAlign='center';
+  for(const e of topology.links){const a=positions.get(e.source),b=positions.get(e.target);
+    ctx.beginPath();ctx.moveTo(...a);ctx.lineTo(...b);ctx.strokeStyle='#4a5270';ctx.lineWidth=2;ctx.stroke();
+    const cap=e.bandwidth_mbps??'default',delay=e.delay_ms??'default';
+    const text=`${cap} Mbps · ${delay} ms`,x=(a[0]+b[0])/2,y=(a[1]+b[1])/2-14;
+    if(window.innerWidth>480){ctx.fillStyle='#0d101a';ctx.fillRect(x-ctx.measureText(text).width/2-4,y-10,ctx.measureText(text).width+8,15);
+    ctx.fillStyle='#b5bed0';ctx.fillText(text,x,y);}
+  }
+  let active=0,latest=null;
+  for(const p of packets){
+    if(!matches(p)||now<p.start)continue;
+    if(!latest||p.start>latest.start)latest=p;
+    const end=p.end??p.start;
+    if(now>end+.06||active>=200)continue;
+    const a=positions.get(p.source),b=positions.get(p.target);
+    const fraction=p.status==='queue_drop'||p.end===null?0:Math.min(1,Math.max(0,(now-p.start)/Math.max(.000001,end-p.start)));
+    const x=a[0]+(b[0]-a[0])*fraction,y=a[1]+(b[1]-a[1])*fraction;
+    const dropped=p.status==='queue_drop'||(p.status==='dropped'&&now>=end);
+    ctx.strokeStyle=dropped?'#fb8fb8':p.detail==='DATA'?'#5ee7f7':'#a78bfa';ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=2;
+    ctx.beginPath();
+    if(dropped){ctx.moveTo(x-6,y-6);ctx.lineTo(x+6,y+6);ctx.moveTo(x+6,y-6);ctx.lineTo(x-6,y+6);ctx.stroke();}
+    else{ctx.arc(x,y,5,0,Math.PI*2);if(p.end===null){ctx.setLineDash([2,2]);ctx.stroke();ctx.setLineDash([]);}else ctx.fill();}
+    active++;
+  }
+  for(const n of topology.nodes){const [x,y]=positions.get(n.id);ctx.beginPath();ctx.arc(x,y,19,0,Math.PI*2);
+    ctx.fillStyle=n.id===topology.sender?'#5ee7f7':n.id===topology.receiver?'#a78bfa':'#293149';ctx.fill();
+    ctx.fillStyle=n.id===topology.sender||n.id===topology.receiver?'#08101c':'#f4f6ff';ctx.font='bold 13px system-ui';ctx.fillText(n.id,x,y+4);
+    ctx.fillStyle='#d1d9ed';ctx.font='12px system-ui';ctx.fillText(n.label,x,y+38,120);
+  }
+  document.getElementById('clock').textContent=now.toFixed(4)+' s';
+  document.getElementById('details').textContent=latest?`Latest start: ${latest.protocol} ${latest.detail} · ${latest.source} → ${latest.target} · UID ${latest.uid} · seq ${latest.sequence} · ack ${latest.ack} · ${latest.bytes} bytes · recorded outcome: ${latest.status}`:'No recorded packets at this time.';
+}
+function frame(timestamp){if(!playing){last=0;return;}if(last)now=Math.min(finish,now+(timestamp-last)/1000*Number(document.getElementById('speed').value));scrub.value=now;
+  if(now>=finish){playing=false;play.textContent='Play';}last=timestamp;draw();if(playing)requestAnimationFrame(frame);}
+play.onclick=()=>{if(now>=finish)now=begin;playing=!playing;last=0;play.textContent=playing?'Pause':'Play';play.setAttribute('aria-label',playing?'Pause packet recording':'Play packet recording');if(playing)requestAnimationFrame(frame);};
+document.getElementById('restart').onclick=()=>{now=begin;scrub.value=now;draw();};
+scrub.oninput=()=>{now=Number(scrub.value);draw();};
+document.getElementById('filter').onchange=draw;
+if(!packets.length){document.body.classList.add('preview');}
+play.textContent=playing?'Pause':'Play';play.setAttribute('aria-label',playing?'Pause packet recording':'Play packet recording');
+new ResizeObserver(draw).observe(canvas);draw();if(playing)requestAnimationFrame(frame);
+</script></html>

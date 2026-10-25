@@ -1,0 +1,48 @@
+experiments:
+  protocols:
+  - TCP
+  - UDP
+  packet_sizes:
+  - 1024
+  packet_counts:
+  - 400
+  duration_seconds:
+  - 3
+  rates_mbps:
+  - 5
+  repetitions: 1
+conditions:
+- name: clean
+  delay_ms: 10
+  loss_percent: 0
+  bandwidth_mbps: 10
+- name: impaired
+  delay_ms: 10
+  loss_percent: 2
+  bandwidth_mbps: 10
+drain_seconds: 5
+queue_packets: 100
+seed: 42
+tcp_algorithm: TcpNewReno
+packet_trace_limit: 50000
+pcap: false
+netanim: false
+topology:
+  nodes:
+  - id: 0
+    label: Sender
+    x: 0
+    y: 50
+  - id: 1
+    label: Receiver
+    x: 100
+    y: 50
+  links:
+  - source: 0
+    target: 1
+    bandwidth_mbps: 10
+    delay_ms: 10
+    loss_percent: 0
+    queue_packets: 100
+  sender: 0
+  receiver: 1

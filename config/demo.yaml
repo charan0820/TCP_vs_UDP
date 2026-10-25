@@ -1,0 +1,16 @@
+# Small enough for a live demonstration; every value is configurable.
+experiments:
+  protocols: [TCP, UDP]
+  packet_sizes: [1024]
+  packet_counts: [10000]
+  duration_seconds: [5]
+  rates_mbps: [20]
+  repetitions: 3
+conditions:
+  - {name: clean, delay_ms: 10, loss_percent: 0, bandwidth_mbps: 10}
+  - {name: lossy, delay_ms: 10, loss_percent: 2, bandwidth_mbps: 10}
+drain_seconds: 3
+queue_packets: 100
+seed: 42
+tcp_algorithm: TcpNewReno
+pcap: false

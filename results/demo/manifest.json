@@ -1,0 +1,50 @@
+{
+  "batch": "20261022T103518Z-d18f41",
+  "timestamp": "2026-10-22T10:35:18.597589+00:00",
+  "ns3_version": "3.35",
+  "configuration": {
+    "experiments": {
+      "protocols": [
+        "TCP",
+        "UDP"
+      ],
+      "packet_sizes": [
+        1024
+      ],
+      "packet_counts": [
+        10000
+      ],
+      "duration_seconds": [
+        5
+      ],
+      "rates_mbps": [
+        20
+      ],
+      "repetitions": 3
+    },
+    "conditions": [
+      {
+        "name": "clean",
+        "delay_ms": 10,
+        "loss_percent": 0,
+        "bandwidth_mbps": 10
+      },
+      {
+        "name": "lossy",
+        "delay_ms": 10,
+        "loss_percent": 2,
+        "bandwidth_mbps": 10
+      }
+    ],
+    "drain_seconds": 3,
+    "queue_packets": 100,
+    "seed": 42,
+    "tcp_algorithm": "TcpNewReno",
+    "pcap": false
+  },
+  "planned_runs": 12,
+  "completed_runs": 12,
+  "status": "complete",
+  "simulation_sha256": "93ce7a4fc8a919b1d3e4e217bb26769aad8d29096a1568ef17303e92ae1f2b5f",
+  "binary_sha256": "b6a5b321793adba9b79876c53250f26f289d55ca323826078f58c3b2bff961e8"
+}

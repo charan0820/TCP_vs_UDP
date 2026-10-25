@@ -1,0 +1,14 @@
+# Packet-size and offered-rate sweep at fixed link settings (54 runs).
+experiments:
+  protocols: [TCP, UDP]
+  packet_sizes: [64, 1024, 8192]
+  packet_counts: [10000]
+  duration_seconds: [5]
+  rates_mbps: [1, 10, 20]
+  repetitions: 3
+conditions:
+  - {name: clean, delay_ms: 10, loss_percent: 0, bandwidth_mbps: 10}
+drain_seconds: 3
+queue_packets: 100
+seed: 42
+tcp_algorithm: TcpNewReno

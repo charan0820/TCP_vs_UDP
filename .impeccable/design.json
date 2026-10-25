@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-22T12:51:36Z",
+  "title": "Design System: Transport Lab",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.012 275)",
+          "oklch(26% 0.012 275)",
+          "oklch(37% 0.012 275)",
+          "oklch(48% 0.012 275)",
+          "oklch(59% 0.012 275)",
+          "oklch(70% 0.012 275)",
+          "oklch(82% 0.012 275)",
+          "oklch(95% 0.012 275)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel",
+        "tonalRamp": [
+          "oklch(15% 0.025 275)",
+          "oklch(26% 0.025 275)",
+          "oklch(37% 0.025 275)",
+          "oklch(48% 0.025 275)",
+          "oklch(59% 0.025 275)",
+          "oklch(70% 0.025 275)",
+          "oklch(82% 0.025 275)",
+          "oklch(95% 0.025 275)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "tonalRamp": [
+          "oklch(15% 0.035 275)",
+          "oklch(26% 0.035 275)",
+          "oklch(37% 0.035 275)",
+          "oklch(48% 0.035 275)",
+          "oklch(59% 0.035 275)",
+          "oklch(70% 0.035 275)",
+          "oklch(82% 0.035 275)",
+          "oklch(95% 0.035 275)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Text",
+        "tonalRamp": [
+          "oklch(15% 0.012 275)",
+          "oklch(26% 0.012 275)",
+          "oklch(37% 0.012 275)",
+          "oklch(48% 0.012 275)",
+          "oklch(59% 0.012 275)",
+          "oklch(70% 0.012 275)",
+          "oklch(82% 0.012 275)",
+          "oklch(95% 0.012 275)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "tonalRamp": [
+          "oklch(15% 0.025 260)",
+          "oklch(26% 0.025 260)",
+          "oklch(37% 0.025 260)",
+          "oklch(48% 0.025 260)",
+          "oklch(59% 0.025 260)",
+          "oklch(70% 0.025 260)",
+          "oklch(82% 0.025 260)",
+          "oklch(95% 0.025 260)"
+        ]
+      },
+      "violet": {
+        "role": "primary",
+        "displayName": "Signal Violet",
+        "tonalRamp": [
+          "oklch(15% 0.15 295)",
+          "oklch(26% 0.15 295)",
+          "oklch(37% 0.15 295)",
+          "oklch(48% 0.15 295)",
+          "oklch(59% 0.15 295)",
+          "oklch(70% 0.15 295)",
+          "oklch(82% 0.15 295)",
+          "oklch(95% 0.15 295)"
+        ]
+      },
+      "cyan": {
+        "role": "secondary",
+        "displayName": "Signal Cyan",
+        "tonalRamp": [
+          "oklch(15% 0.12 200)",
+          "oklch(26% 0.12 200)",
+          "oklch(37% 0.12 200)",
+          "oklch(48% 0.12 200)",
+          "oklch(59% 0.12 200)",
+          "oklch(70% 0.12 200)",
+          "oklch(82% 0.12 200)",
+          "oklch(95% 0.12 200)"
+        ]
+      },
+      "pink": {
+        "role": "tertiary",
+        "displayName": "Drop Pink",
+        "tonalRamp": [
+          "oklch(15% 0.12 350)",
+          "oklch(26% 0.12 350)",
+          "oklch(37% 0.12 350)",
+          "oklch(48% 0.12 350)",
+          "oklch(59% 0.12 350)",
+          "oklch(70% 0.12 350)",
+          "oklch(82% 0.12 350)",
+          "oklch(95% 0.12 350)"
+        ]
+      },
+      "mint": {
+        "role": "secondary",
+        "displayName": "Status Mint",
+        "tonalRamp": [
+          "oklch(15% 0.1 165)",
+          "oklch(26% 0.1 165)",
+          "oklch(37% 0.1 165)",
+          "oklch(48% 0.1 165)",
+          "oklch(59% 0.1 165)",
+          "oklch(70% 0.1 165)",
+          "oklch(82% 0.1 165)",
+          "oklch(95% 0.1 165)"
+        ]
+      },
+      "selected": {
+        "role": "neutral",
+        "displayName": "Selected Violet Surface",
+        "tonalRamp": [
+          "oklch(15% 0.045 295)",
+          "oklch(26% 0.045 295)",
+          "oklch(37% 0.045 295)",
+          "oklch(48% 0.045 295)",
+          "oklch(59% 0.045 295)",
+          "oklch(70% 0.045 295)",
+          "oklch(82% 0.045 295)",
+          "oklch(95% 0.045 295)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Landing Display",
+        "purpose": "PACKET CORE title; desktop clamp and a fixed mobile override."
+      },
+      "headline": {
+        "displayName": "Page Headline",
+        "purpose": "Working-page primary heading."
+      },
+      "section": {
+        "displayName": "Section Heading",
+        "purpose": "Working-page section hierarchy."
+      },
+      "title": {
+        "displayName": "Small Heading",
+        "purpose": "Subsection hierarchy."
+      },
+      "body": {
+        "displayName": "Narrative Body",
+        "purpose": "Default shell copy; size follows native Streamlit theme."
+      },
+      "feature-body": {
+        "displayName": "Feature Copy",
+        "purpose": "Compact landing explanation with generous leading."
+      },
+      "button": {
+        "displayName": "Shell Action",
+        "purpose": "Native Streamlit button labels."
+      },
+      "label": {
+        "displayName": "Technical Label",
+        "purpose": "Tracked landing annotations and hero metadata."
+      },
+      "metric": {
+        "displayName": "Measured Value",
+        "purpose": "Prominent measured results."
+      },
+      "player-body": {
+        "displayName": "Player Body",
+        "purpose": "System-font exception inside the standalone iframe."
+      },
+      "player-clock": {
+        "displayName": "Simulation Clock",
+        "purpose": "Monospaced simulation time in the standalone player."
+      }
+    },
+    "shadows": [
+      {
+        "name": "primary-action",
+        "value": "0 8px 24px -12px #7553c4",
+        "purpose": "Restrained violet lift for primary actions only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "signal-ease",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Shared easing for finite shell and signal entrances."
+      },
+      {
+        "name": "surface-in",
+        "value": ".45s cubic-bezier(.16,1,.3,1)",
+        "purpose": "Entry from opacity .65, blur(2px) and translateY(5px)."
+      },
+      {
+        "name": "signal-arrive",
+        "value": "1.8s cubic-bezier(.16,1,.3,1)",
+        "purpose": "One reveal from clipped center, opacity .45 and translateY(20px)."
+      },
+      {
+        "name": "beam-reveal",
+        "value": "2s cubic-bezier(.16,1,.3,1)",
+        "purpose": "One change from blur(28px)/opacity .3 to blur(13px)/opacity 1."
+      },
+      {
+        "name": "control-transition",
+        "value": "background .2s, border-color .2s, transform .2s",
+        "purpose": "Shell button color changes and 1px hover lift."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Disable decorative animations, transitions and smooth scroll; start recorded playback paused."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "767px"
+      },
+      {
+        "name": "player-narrow",
+        "value": "480px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The shell's main action, translated from the native Streamlit button styling.",
+      "html": "<button class=\"ds-primary\">Run simulation</button>",
+      "css": ".ds-primary{font-family:Sora,sans-serif;font-size:.86rem;min-height:44px;border:1px solid var(--violet,#a78bfa);border-radius:8px;background:linear-gradient(115deg,#7250d5,#5631a9);color:white;box-shadow:0 8px 24px -12px #7553c4;transition:background .2s,border-color .2s,transform .2s}.ds-primary:hover{background:linear-gradient(115deg,#8562e9,#6740be);transform:translateY(-1px)}.ds-primary:focus-visible,.ds-secondary:focus-visible{outline:2px solid var(--cyan,#5ee7f7);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Native dark-theme secondary action with the observed shell border, hover and focus treatment.",
+      "html": "<button class=\"ds-secondary\">Browse measured recordings</button>",
+      "css": ".ds-secondary{font-family:Sora,sans-serif;font-size:.86rem;min-height:44px;color:var(--text,#f4f6ff);background:var(--panel,#0d101a);border:1px solid #35394f;border-radius:8px;transition:background .2s,border-color .2s,transform .2s}.ds-secondary:hover{background:var(--selected,#211b35);border-color:var(--violet,#a78bfa);transform:translateY(-1px)}.ds-primary:focus-visible,.ds-secondary:focus-visible{outline:2px solid var(--cyan,#5ee7f7);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Compact native radio navigation translated into an isolated visual example; the running app retains its radio semantics.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Workspace\"><a href=\"#overview\">Overview</a><a href=\"#lab\" aria-current=\"page\">Simulation lab</a><a href=\"#archive\">Archive</a><a href=\"#guide\">Guide</a></nav>",
+      "css": ".ds-nav{display:flex;gap:8px;padding:4px 0 18px;border-bottom:1px solid var(--line,#2a3044);flex-wrap:wrap}.ds-nav a{font-family:Sora,sans-serif;font-size:.82rem;color:var(--text,#f4f6ff);text-decoration:none;padding:8px 12px;border:1px solid transparent;border-radius:8px;transition:background .2s}.ds-nav a[aria-current=page]{background:var(--selected,#211b35);border-color:#4e3b74}.ds-nav a:focus-visible{outline:2px solid var(--cyan,#5ee7f7);outline-offset:4px}@media(max-width:767px){.ds-nav a{padding:6px}}@media(prefers-reduced-motion:reduce){.ds-nav a{transition:none}}"
+    },
+    {
+      "name": "Ready State",
+      "kind": "chip",
+      "refersTo": "hero-status",
+      "description": "The landing's explicit ready-to-transmit label.",
+      "html": "<span class=\"ds-ready\">READY TO TRANSMIT</span>",
+      "css": ".ds-ready{display:inline-block;font:10px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#d0eefa;border:1px solid #3b4660;background:#09101dd9;border-radius:999px;padding:10px 17px}"
+    },
+    {
+      "name": "Network Feature Card",
+      "kind": "card",
+      "refersTo": "feature",
+      "description": "A cyan-tinted explanatory panel from the landing page.",
+      "html": "<article class=\"ds-feature\"><h2>Your network.<br>Your conditions.</h2><p>Connect nodes, set a bottleneck and introduce loss. Run the topology through real NS-3 transport models.</p></article>",
+      "css": ".ds-feature{font-family:Sora,sans-serif;border-radius:12px;padding:32px;background:linear-gradient(140deg,#10303b,#111c2d);color:#b9eff4;overflow:hidden}.ds-feature h2{font-size:clamp(25px,3vw,34px);line-height:1.22;letter-spacing:-.035em;color:#e3fcff;margin:20px 0 14px}.ds-feature p{font-size:13px;line-height:1.8;max-width:54ch}@media(max-width:767px){.ds-feature{padding:24px}}"
+    },
+    {
+      "name": "Player Select",
+      "kind": "input",
+      "refersTo": "player-field",
+      "description": "The standalone player's native labelled filter field.",
+      "html": "<label class=\"ds-player-label\">Show <select class=\"ds-player-select\"><option>All packets</option><option>Data</option><option>ACK</option><option>Handshake</option><option>Drops</option></select></label>",
+      "css": ".ds-player-label{font:13px system-ui,sans-serif;color:var(--text,#f4f6ff)}.ds-player-select{font:inherit;padding:8px 12px;min-height:40px;border:1px solid #353d55;border-radius:8px;background:#131827;color:var(--text,#f4f6ff);color-scheme:dark}.ds-player-select:focus-visible{outline:2px solid var(--cyan,#5ee7f7);outline-offset:3px}"
+    },
+    {
+      "name": "Packet Canvas Frame",
+      "kind": "custom",
+      "refersTo": "packet-canvas",
+      "description": "The recorded-event canvas surface and narrow-screen link list; the isolated example is an empty frame, not a running recording.",
+      "html": "<div class=\"ds-canvas\" role=\"img\" aria-label=\"Packet visualization frame\"></div><div class=\"ds-links\" role=\"list\" aria-label=\"Link bandwidth and delay\"></div><p class=\"ds-canvas-note\">Topology preview. Run an experiment to record real packet movement.</p>",
+      "css": ".ds-canvas{width:100%;height:300px;background:radial-gradient(ellipse at 50% 30%,#19192c,var(--panel,#0d101a) 75%);border:1px solid var(--line,#2a3044);border-radius:12px}.ds-links{display:none;max-height:100px;overflow:auto;margin:8px 0;border:1px solid var(--line,#2a3044);border-radius:8px;padding:8px 10px;font:11px ui-monospace,monospace;line-height:1.8;color:var(--muted,#b5bed0)}@media(max-width:480px){.ds-links{display:block}}.ds-canvas-note{font:11px/1.6 system-ui,sans-serif;color:var(--muted,#b5bed0)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Signal archive",
+    "overview": "The Signal archive turns a network experiment into a readable trail of evidence. A near-black field gives white typography room to lead; a cyan-to-violet signal column establishes the identity. Colored gradient panels explain the mechanism, while the working lab uses compact native controls and clear borders.\n\nSora supplies the large, direct voice; IBM Plex Mono marks technical labels and measured values. The atmosphere is expressive, but every status and recording claim must describe the local simulator honestly. Decorative motion arrives once, then settles so users can inspect the experiment.",
+    "keyCharacteristics": [
+      "Near-black surfaces with cyan and violet signal light.",
+      "Large editorial type paired with precise technical labels.",
+      "Colorful explanatory panels and compact operational controls.",
+      "Bounded motion, visible focus and honest recording states."
+    ],
+    "rules": [
+      {
+        "name": "The Recorded Signal Rule",
+        "body": "Packet color always has a text label; animation represents captured events, and a topology preview is identified as a preview.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Use Sora for narrative and controls; reserve the mono face for telemetry, identifiers, code and compact technical labels.",
+        "section": "typography"
+      },
+      {
+        "name": "The Quiet Surface Rule",
+        "body": "Use tonal layering and borders for working panels. Reserve the luminous field for the landing expression and the violet shadow for primary actions.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the cyan/violet signal identity and near-black workspace consistent across the shell and packet player.",
+      "Do provide visible keyboard focus and readable labels alongside packet colors.",
+      "Do respect reduced motion: disable decorative transitions and begin playback paused.",
+      "Do distinguish topology previews, recorded events, missing captures and truncated captures.",
+      "Do use the same selected run for replay and its measured results."
+    ],
+    "donts": [
+      "Don't turn the reference image's fictional memory or security telemetry into product claims.",
+      "Don't animate invented packet deliveries or expose Play controls on an empty topology preview.",
+      "Don't use the hero's large display treatment for dense editor labels or measured tables.",
+      "Don't add persistent decorative movement behind the operational workspace."
+    ]
+  }
+}

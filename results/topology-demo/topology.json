@@ -1,0 +1,59 @@
+{
+  "nodes": [
+    {
+      "id": 0,
+      "label": "Sender",
+      "x": 0,
+      "y": 50
+    },
+    {
+      "id": 1,
+      "label": "Router A",
+      "x": 33,
+      "y": 50
+    },
+    {
+      "id": 2,
+      "label": "Router B",
+      "x": 66,
+      "y": 50
+    },
+    {
+      "id": 3,
+      "label": "Receiver",
+      "x": 100,
+      "y": 50
+    }
+  ],
+  "links": [
+    {
+      "source": 0,
+      "target": 1,
+      "bandwidth_mbps": 100,
+      "delay_ms": 1,
+      "loss_percent": 2.0000000000000018,
+      "queue_packets": 100,
+      "id": 0
+    },
+    {
+      "source": 1,
+      "target": 2,
+      "bandwidth_mbps": 2,
+      "delay_ms": 10,
+      "loss_percent": 2.0000000000000018,
+      "queue_packets": 30,
+      "id": 1
+    },
+    {
+      "source": 2,
+      "target": 3,
+      "bandwidth_mbps": 100,
+      "delay_ms": 1,
+      "loss_percent": 2.0000000000000018,
+      "queue_packets": 100,
+      "id": 2
+    }
+  ],
+  "sender": 0,
+  "receiver": 3
+}

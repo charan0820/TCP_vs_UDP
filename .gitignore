@@ -1,9 +1,53 @@
+# Python environments and caches
 __pycache__/
-/src/__pycache__/
-*.pyc
+*.py[cod]
+.venv/
 venv/
 env/
-.venv/
-.idea/
-data/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local credentials and environment settings
+.env
+.env.*
+!.env.example
+!.env.sample
+/.streamlit/secrets.toml
+
+# Compiled simulator and native build artifacts
+/build/
+/simulation/build/
+cmake-build-*/
+*.o
+*.obj
+*.exe
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.dSYM/
 node_modules/
+
+# Raw NS-3 runs and local validation captures
+# Keep the curated results/demo/ and results/topology-demo/ exports in Git.
+/data/
+*.pcap
+*.pcapng
+/results/validation/
+/.impeccable/review/
+
+# Editor, OS and temporary files
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.log
+*.tmp
+*.swp
+*.swo
+*~
